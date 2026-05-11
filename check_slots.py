@@ -27,29 +27,45 @@ class VTUSlotChecker:
     
     def login(self):
         """Login to VTU portal"""
-        login_url = f"{self.base_url}/auth/login"
-        payload = {
-            "username": self.username,
-            "password": self.password
-        }
+        def login(self):
+            login_url = f"{self.base_url}/auth/login"
         
-        try:
-            response = self.session.post(login_url, json=payload, timeout=30)
-            response.raise_for_status()
-            data = response.json()
-            
-            if data.get('success'):
-                cookies = response.cookies.get_dict()
-                self.access_token = cookies.get('access_token')
-                print(f"✓ Login successful for {self.username}")
-                return True
-            else:
-                print(f"✗ Login failed: {data.get('message')}")
+            payload = {
+                "username": self.username,
+                "password": self.password
+            }
+        
+            try:
+                print(f"Trying login URL: {login_url}")
+        
+                response = self.session.post(
+                    login_url,
+                    json=payload,
+                    timeout=30
+                )
+        
+                print("Status Code:", response.status_code)
+                print("Response Text:", response.text)
+                print("Cookies:", response.cookies.get_dict())
+        
+                response.raise_for_status()
+        
+                data = response.json()
+        
+                if data.get('success'):
+                    cookies = response.cookies.get_dict()
+                    self.access_token = cookies.get('access_token')
+        
+                    print(f"✓ Login successful for {self.username}")
+                    return True
+        
+                else:
+                    print(f"✗ Login failed: {data.get('message')}")
+                    return False
+        
+            except Exception as e:
+                print(f"✗ Login error: {str(e)}")
                 return False
-                
-        except Exception as e:
-            print(f"✗ Login error: {str(e)}")
-            return False
     
     def check_slots(self, course_id, exam_type=1):
         """Check for available exam slots"""
