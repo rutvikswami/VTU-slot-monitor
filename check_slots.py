@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 class VTUSlotChecker:
-    def __init__(self, username, password):
+    def __init__(self, email, password):
         self.base_url = "https://online.vtu.ac.in/api/v1"
         self.username = username
         self.password = password
@@ -31,7 +31,7 @@ class VTUSlotChecker:
             login_url = f"{self.base_url}/auth/login"
         
             payload = {
-                "username": self.username,
+                "email": self.username,
                 "password": self.password
             }
         
