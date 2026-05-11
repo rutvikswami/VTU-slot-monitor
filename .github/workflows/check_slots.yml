@@ -34,6 +34,5 @@ jobs:
         EMAIL_TO: ${{ secrets.EMAIL_TO }}
         EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
         EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-        COURSE_IDS: ${{ secrets.COURSE_IDS }}
       run: |
         python check_slots.py
