@@ -9,8 +9,7 @@ TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 CHAT_ID = os.environ.get('CHAT_ID')
 
 COURSES = [
-    {"id": 18, "name": "Wastewater Treatment and Recycling"},
-    {"id": 189, "name": "Privacy And Security"}
+    {"id": 18, "name": "Wastewater Treatment and Recycling"}
 ]
 
 def send_alert(msg):
